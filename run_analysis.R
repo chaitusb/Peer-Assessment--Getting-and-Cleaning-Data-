@@ -7,15 +7,15 @@ column_indexes<-grep("mean|std", column_names[,2])
 activity_labels<-read.table("activity_labels.txt")
 
 #Load files (subject)
-subject_test<-read.table("subject_test.txt")
-subject_train<-read.table("subject_train.txt")
+subject_test<-read.table("test/subject_test.txt")
+subject_train<-read.table("train/subject_train.txt")
 #Set labels for subject datasets
 names(subject_test)<-c("subjectnumber")
 names(subject_train)<-c("subjectnumber")
 
 #Load files (x)
-x_test<-read.table("X_test.txt")
-x_train<-read.table("X_train.txt")
+x_test<-read.table("test/X_test.txt")
+x_train<-read.table("train/X_train.txt")
 #Get only columns with mean and std
 x_test<-x_test[,column_indexes]
 x_train<-x_train[,column_indexes]
@@ -24,8 +24,8 @@ names(x_test)<-column_names[column_indexes,2]
 names(x_train)<-column_names[column_indexes,2]
 
 #Load files (y)
-y_test<-read.table("y_test.txt")
-y_train<-read.table("y_train.txt")
+y_test<-read.table("test/y_test.txt")
+y_train<-read.table("train/y_train.txt")
 
 #Merge y datasets (train and test) with activity labels
 y_test<-merge(activity_labels, y_test)
@@ -36,9 +36,9 @@ names(y_test)<-c("activitycode", "activitydescription")
 names(y_train)<-c("activitycode", "activitydescription")
 
 #Create data frame from test data
-test_df<-data.frame(subject_test, x_test, y_test)
+test_df<-data.frame(subject_test, y_test, x_test)
 #Create data frame from train data
-train_df<-data.frame(subject_train, x_train, y_train)
+train_df<-data.frame(subject_train, y_train, x_train)
 
 #Combine test and train data frame
 dataset<-rbind(test_df, train_df)
@@ -47,7 +47,7 @@ dataset<-rbind(test_df, train_df)
 splitdatasets<-split(dataset, list(dataset$subjectnumber, dataset$activitycode), drop=TRUE)
 
 #Calculate column means (only to certain columns) and transpose
-colmeans<-data.frame(t(sapply(splitdatasets, function(x) colMeans(x[, 2:80], na.rm=TRUE))))
+colmeans<-data.frame(t(sapply(splitdatasets, function(x) colMeans(x[, 4:82], na.rm=TRUE))))
 #Get row.names
 subject.activity<-row.names(colmeans)
 #Delete row.names column

@@ -17,7 +17,7 @@ The data is on a folder called **UCI HAR Dataset**, we will only need the follow
 * y_test.txt
 * y_train.txt
 
-**Put all these files on your R working directory at the same level.**
+**For the script to work you need to put the UCI HAR Dataset on your R working directory.**
 
 
 #The code
@@ -30,5 +30,5 @@ This project has only one script **run_analysis.R**. This code turns all the fil
 4. Appropriately labels the data set with descriptive activity names. 
 5. Creates a second, independent **tidy data set with the average of each variable (dataset2.csv)** for each activity and each subject. 
 
-Detailed information about generated datasets can be found on the CodeBook.
+Detailed information about generated datasets can be found on the CodeBook.md file.
 
