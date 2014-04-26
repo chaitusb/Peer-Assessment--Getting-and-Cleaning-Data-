@@ -1,2 +1,4 @@
 data/**
 UCI HAR Dataset/**
+.RData
+.Rhistory

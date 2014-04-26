@@ -26,9 +26,11 @@ names(x_train)<-column_names[column_indexes,2]
 #Load files (y)
 y_test<-read.table("y_test.txt")
 y_train<-read.table("y_train.txt")
+
 #Merge y datasets (train and test) with activity labels
 y_test<-merge(activity_labels, y_test)
 y_train<-merge(activity_labels, y_train)
+
 #Set labels for y datasets
 names(y_test)<-c("activitycode", "activitydescription")
 names(y_train)<-c("activitycode", "activitydescription")
@@ -52,3 +54,7 @@ subject.activity<-row.names(colmeans)
 row.names(colmeans)<-NULL
 #Create new subject.activity column
 colmeans<-cbind(subject.activity, colmeans)
+
+#Save the two tidy datasets
+write.csv(dataset, file="dataset1.csv")
+write.csv(colmeans, file="dataset2.csv")
